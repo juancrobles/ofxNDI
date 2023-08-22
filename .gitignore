@@ -1,4 +1,6 @@
 libs/NDI/lib/ios
+libs/NDI*
+
 example-*/config.make
 example-*/*.sln
 example-*/*.vcxproj

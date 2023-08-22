@@ -1,5 +1,6 @@
 #include "ofxNDIVideoGrabber.h"
 #include "ofxNDIRecvStream.h"
+#include "ofPixels.h"
 
 using namespace std;
 using namespace ofxNDI;

@@ -2,6 +2,7 @@
 #include "ofImage.h"
 #include "ofSoundBuffer.h"
 #include "Processing.NDI.utilities.h"
+#include "ofPixels.h"
 
 using namespace ofxNDI;
 
