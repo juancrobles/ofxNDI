@@ -1,11 +1,12 @@
 #pragma once
 
 #include <stddef.h>
-#include <Processing.NDI.Advanced.h>
+#include <Processing.NDI.lib.h>
 #include <string>
 #include <vector>
 #include <mutex>
 #include <thread>
+#include <functional>
 
 namespace ofxNDI {
 
@@ -17,9 +18,9 @@ struct Source {
 		metadata = p_metadata ? p_metadata : "";
 	}
 	Source(NDIlib_source_t v):Source(v.p_ndi_name, v.p_url_address){}
-	Source(NDIlib_source_v2_t v):Source(v.p_ndi_name, v.p_url_address, v.p_metadata){}
+	//Source(NDIlib_source_v2_t v):Source(v.p_ndi_name, v.p_url_address, v.p_metadata){}
 	NDIlib_source_t toV1() const { return {ndi_name.c_str(), url_address.c_str()}; }
-	NDIlib_source_v2_t toV2() const { return {ndi_name.c_str(), url_address.c_str(), ""}; }
+	//NDIlib_source_v2_t toV2() const { return {ndi_name.c_str(), url_address.c_str(), ""}; }
 };
 
 namespace Find {
