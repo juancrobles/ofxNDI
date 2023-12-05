@@ -2,7 +2,7 @@
 
 //-----------------------------------------------------------------------------------------------------------
 //
-// Copyright (C)2014-2022, NewTek, inc.
+// Copyright (C) 2023 Vizrt NDI AB. All rights reserved.
 //
 // This file is part of the NDI Advanced SDK and may not be distributed.
 //
@@ -40,7 +40,7 @@ typedef enum NDIlib_FourCC_video_type_ex_e {
 	NDIlib_FourCC_video_type_ex_SHQ7_lowest_bandwidth = NDI_LIB_FOURCC('s', 'h', 'q', '7'),			// SpeedHQ 4:2:2:4
 	NDIlib_FourCC_type_SHQ7_lowest_bandwidth = NDIlib_FourCC_video_type_ex_SHQ7_lowest_bandwidth,	// Backwards compatibility
 
-	// If SpeedHQ 4:4:4 / 4:4:4:4 formats are desired, please contact ndi@newtek.com.
+	// If SpeedHQ 4:4:4 / 4:4:4:4 formats are desired, please contact sdk@ndi.video.
 
 	// H.264 video at the highest bandwidth -- the data field is expected to be prefixed with the
 	// NDIlib_compressed_packet_t structure.
@@ -256,7 +256,10 @@ int NDIlib_send_get_q_factor(NDIlib_send_instance_t p_instance, const NDIlib_vid
 // regarding any stream bandwidth. If video_data is not NULL, then the video_data's FourCC will determine if
 // a keyframe of a matching type is required. In this case, the data pointer is not required to be valid.
 PROCESSINGNDILIB_ADVANCED_API
-bool NDIlib_send_is_keyframe_required(NDIlib_send_instance_t p_instance, const NDIlib_video_frame_v2_t* p_video_data NDILIB_CPP_DEFAULT_VALUE(NULL));
+bool NDIlib_send_is_keyframe_required(
+	NDIlib_send_instance_t p_instance,
+	const NDIlib_video_frame_v2_t* p_video_data NDILIB_CPP_DEFAULT_VALUE(NULL)
+);
 
 // Returns true if there has been an update for the "keyframe requirement" since the last call to this
 // function or if an update occurred during the timeout period. If no update has occurred, false will be
@@ -265,7 +268,11 @@ bool NDIlib_send_is_keyframe_required(NDIlib_send_instance_t p_instance, const N
 // will determine if a keyframe requirement update has occurred for that matching type, specifically the
 // matching bandwidth. In this case, the data pointer is not required to be valid.
 PROCESSINGNDILIB_ADVANCED_API
-bool NDIlib_send_wait_for_keyframe_request(NDIlib_send_instance_t p_instance, uint32_t timeout_in_ms, const NDIlib_video_frame_v2_t* p_video_data NDILIB_CPP_DEFAULT_VALUE(NULL));
+bool NDIlib_send_wait_for_keyframe_request(
+	NDIlib_send_instance_t p_instance,
+	uint32_t timeout_in_ms,
+	const NDIlib_video_frame_v2_t* p_video_data NDILIB_CPP_DEFAULT_VALUE(NULL)
+);
 
 // Initiate a new request for a keyframe to be sent to the NDI sender. The NDI receiver will typically handle
 // this kind of request automatically, however, there may be scenarios in which you need to make a request
@@ -283,7 +290,10 @@ void NDIlib_recv_request_keyframe(NDIlib_recv_instance_t p_instance);
 // within the memory of the first block. If it is not, the frame will be dropped. The scatter-gather list
 // will be ignored for uncompressed frames.
 PROCESSINGNDILIB_ADVANCED_API
-void NDIlib_send_send_video_scatter(NDIlib_send_instance_t p_instance, const NDIlib_video_frame_v2_t* p_video_data, const NDIlib_frame_scatter_t* p_video_scatter);
+void NDIlib_send_send_video_scatter(
+	NDIlib_send_instance_t p_instance,
+	const NDIlib_video_frame_v2_t* p_video_data, const NDIlib_frame_scatter_t* p_video_scatter
+);
 
 // Send a video frame asynchronously from a scatter-gather list. The rules of the asynchronous send follow
 // the rules set by the NDIlib_send_send_video_async_v2 function. If the p_video_scatter argument is NULL,
@@ -296,7 +306,10 @@ void NDIlib_send_send_video_scatter(NDIlib_send_instance_t p_instance, const NDI
 // within the memory of the first block. If it is not, the frame will be dropped. The scatter-gather list
 // will be ignored for uncompressed frames.
 PROCESSINGNDILIB_ADVANCED_API
-void NDIlib_send_send_video_scatter_async(NDIlib_send_instance_t p_instance, const NDIlib_video_frame_v2_t* p_video_data, const NDIlib_frame_scatter_t* p_video_scatter);
+void NDIlib_send_send_video_scatter_async(
+	NDIlib_send_instance_t p_instance,
+	const NDIlib_video_frame_v2_t* p_video_data, const NDIlib_frame_scatter_t* p_video_scatter
+);
 
 // Send an audio frame synchronously from a scatter-gather list. If the p_audio_scatter argument is NULL,
 // then it would be as if the NDIlib_send_send_audio_v3 were called instead. If the p_audio_scatter argument
@@ -308,7 +321,10 @@ void NDIlib_send_send_video_scatter_async(NDIlib_send_instance_t p_instance, con
 // within the memory of the first block. If it is not, the frame will be dropped. The scatter-gather list
 // will be ignored for uncompressed frames.
 PROCESSINGNDILIB_ADVANCED_API
-void NDIlib_send_send_audio_scatter(NDIlib_send_instance_t p_instance, const NDIlib_audio_frame_v3_t* p_audio_data, const NDIlib_frame_scatter_t* p_audio_scatter);
+void NDIlib_send_send_audio_scatter(
+	NDIlib_send_instance_t p_instance,
+	const NDIlib_audio_frame_v3_t* p_audio_data, const NDIlib_frame_scatter_t* p_audio_scatter
+);
 
 // This is an extended function of the Advanced SDK that allows someone external to additionally control the
 // tally state of an input. For instance it will allow you to specify that you already know that you are on
@@ -330,22 +346,34 @@ void NDIlib_routing_clear_connection_metadata(NDIlib_routing_instance_t p_instan
 // Create a new finder instance. This will return NULL if it fails. If you specify p_create_settings to be
 // NULL, then the finder will be created with default settings.
 PROCESSINGNDILIB_ADVANCED_API
-NDIlib_find_instance_t NDIlib_find_create_v3(const NDIlib_find_create_t* p_create_settings NDILIB_CPP_DEFAULT_VALUE(NULL), const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL));
+NDIlib_find_instance_t NDIlib_find_create_v3(
+	const NDIlib_find_create_t* p_create_settings NDILIB_CPP_DEFAULT_VALUE(NULL),
+	const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL)
+);
 
 // Create a new receiver instance. This will return NULL if it fails. If you specify p_create_settings to be
 // NULL, then the receiver will be created with default settings and will automatically determine a receiver
 // name.
 PROCESSINGNDILIB_ADVANCED_API
-NDIlib_recv_instance_t NDIlib_recv_create_v4(const NDIlib_recv_create_v3_t* p_create_settings NDILIB_CPP_DEFAULT_VALUE(NULL), const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL));
+NDIlib_recv_instance_t NDIlib_recv_create_v4(
+	const NDIlib_recv_create_v3_t* p_create_settings NDILIB_CPP_DEFAULT_VALUE(NULL),
+	const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL)
+);
 
 // Create a new sender instance. This will return NULL if it fails. If you specify p_create_settings to be
 // NULL, then the sender will be created with default settings.
 PROCESSINGNDILIB_ADVANCED_API
-NDIlib_send_instance_t NDIlib_send_create_v2(const NDIlib_send_create_t* p_create_settings NDILIB_CPP_DEFAULT_VALUE(NULL), const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL));
+NDIlib_send_instance_t NDIlib_send_create_v2(
+	const NDIlib_send_create_t* p_create_settings NDILIB_CPP_DEFAULT_VALUE(NULL),
+	const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL)
+);
 
 // Create an NDI routing source.
 PROCESSINGNDILIB_ADVANCED_API
-NDIlib_routing_instance_t NDIlib_routing_create_v2(const NDIlib_routing_create_t* p_create_settings, const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL));
+NDIlib_routing_instance_t NDIlib_routing_create_v2(
+	const NDIlib_routing_create_t* p_create_settings,
+	const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL)
+);
 
 // As of NDI 5, we support custom memory allocators.
 typedef bool (*NDIlib_video_alloc_t)(void* p_opaque, NDIlib_video_frame_v2_t* p_video_data);
@@ -354,10 +382,18 @@ typedef bool (*NDIlib_audio_alloc_t)(void* p_opaque, NDIlib_audio_frame_v3_t* p_
 typedef bool (*NDIlib_audio_free_t)(void* p_opaque, const NDIlib_audio_frame_v3_t* p_audio_data);
 
 PROCESSINGNDILIB_ADVANCED_API
-void NDIlib_recv_set_video_allocator(NDIlib_recv_instance_t p_instance, void* p_opaque, NDIlib_video_alloc_t p_allocator, NDIlib_video_free_t p_deallocator);
+void NDIlib_recv_set_video_allocator(
+	NDIlib_recv_instance_t p_instance,
+	void* p_opaque,
+	NDIlib_video_alloc_t p_allocator, NDIlib_video_free_t p_deallocator
+);
 
 PROCESSINGNDILIB_ADVANCED_API
-void NDIlib_recv_set_audio_allocator(NDIlib_recv_instance_t p_instance, void* p_opaque, NDIlib_audio_alloc_t p_allocator, NDIlib_audio_free_t p_deallocator);
+void NDIlib_recv_set_audio_allocator(
+	NDIlib_recv_instance_t p_instance,
+	void* p_opaque,
+	NDIlib_audio_alloc_t p_allocator, NDIlib_audio_free_t p_deallocator
+);
 
 // When you are working with asynchronous buffers, by default a send operation from the previous send
 // operation must have completed before the current one will complete. What this means is that if a sender is
@@ -368,7 +404,11 @@ void NDIlib_recv_set_audio_allocator(NDIlib_recv_instance_t p_instance, void* p_
 typedef void (*NDIlib_video_send_async_completion_t)(void* p_opaque, const NDIlib_video_frame_v2_t* p_video_data);
 
 PROCESSINGNDILIB_ADVANCED_API
-void NDIlib_send_set_video_async_completion(NDIlib_send_instance_t p_instance, void* p_opaque, NDIlib_video_send_async_completion_t p_deallocator);
+void NDIlib_send_set_video_async_completion(
+	NDIlib_send_instance_t p_instance,
+	void* p_opaque,
+	NDIlib_video_send_async_completion_t p_deallocator
+);
 
 typedef struct NDIlib_source_v2_t {
 	// A UTF8 string that provides a user readable name for this source. This can be used for serialization,

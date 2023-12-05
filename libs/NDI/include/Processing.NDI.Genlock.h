@@ -2,7 +2,7 @@
 
 //-----------------------------------------------------------------------------------------------------------
 //
-// Copyright (C)2014-2022, NewTek, inc.
+// Copyright (C) 2023 Vizrt NDI AB. All rights reserved.
 //
 // This file is part of the NDI Advanced SDK and may not be distributed.
 //
@@ -18,7 +18,10 @@ typedef struct NDIlib_genlock_instance_type* NDIlib_genlock_instance_t;
 // genlock that has a null source name and then later use the NDIlib_genlock_connect function to change the
 // connection being used.
 PROCESSINGNDILIB_ADVANCED_API
-NDIlib_genlock_instance_t NDIlib_genlock_create(const NDIlib_source_t* p_src_settings NDILIB_CPP_DEFAULT_VALUE(NULL), const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL));
+NDIlib_genlock_instance_t NDIlib_genlock_create(
+	const NDIlib_source_t* p_src_settings NDILIB_CPP_DEFAULT_VALUE(NULL),
+	const char* p_config_data NDILIB_CPP_DEFAULT_VALUE(NULL)
+);
 
 // This function will destroy
 PROCESSINGNDILIB_ADVANCED_API
@@ -27,7 +30,10 @@ void NDIlib_genlock_destroy(NDIlib_genlock_instance_t p_instance);
 // If you wish to change the NDI source after having created it, it is possible to call this function and
 // change the source that is connected too. This can be used to disconnect a genlock
 PROCESSINGNDILIB_ADVANCED_API
-void NDIlib_genlock_connect(NDIlib_genlock_instance_t p_instance, const NDIlib_source_t* p_src_settings NDILIB_CPP_DEFAULT_VALUE(NULL));
+void NDIlib_genlock_connect(
+	NDIlib_genlock_instance_t p_instance,
+	const NDIlib_source_t* p_src_settings NDILIB_CPP_DEFAULT_VALUE(NULL)
+);
 
 // This function will tell you whether the signal is currently being genlocked too. If the NDI sender that is
 // being used as the genlock source is not currently sending an active signal then this will return false.

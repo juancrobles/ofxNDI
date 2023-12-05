@@ -2,7 +2,7 @@
 
 //-----------------------------------------------------------------------------------------------------------
 //
-// Copyright (C)2014-2022, NewTek, inc.
+// Copyright (C) 2023 Vizrt NDI AB. All rights reserved.
 //
 // This file is part of the NDI Advanced SDK and may not be distributed.
 //
@@ -59,7 +59,11 @@ typedef enum NDIlib_avsync_ret_e {
 // This is a complex function please review the Advanced SDK documentation for the full parameters around how
 // it is used.
 PROCESSINGNDILIB_ADVANCED_API
-NDIlib_avsync_ret_e NDIlib_avsync_synchronize(NDIlib_avsync_instance_t p_avsync, const NDIlib_video_frame_v2_t* p_video_frame, NDIlib_audio_frame_v3_t* p_audio_frame);
+NDIlib_avsync_ret_e NDIlib_avsync_synchronize(
+	NDIlib_avsync_instance_t p_avsync,
+	const NDIlib_video_frame_v2_t* p_video_frame,
+	NDIlib_audio_frame_v3_t* p_audio_frame
+);
 
 // Free buffers returned from NDIlib_avsync_synchronize.
 PROCESSINGNDILIB_ADVANCED_API

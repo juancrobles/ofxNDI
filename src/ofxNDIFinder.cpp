@@ -23,14 +23,14 @@ std::function<std::vector<Source>(bool, bool)> ofxNDIFinder::watchSources(bool s
 	found_sources_.clear();
 	
 	watcher_ = std::thread([&](NDIlib_find_create_t settings) {
-		NDIlib_find_instance_t finder = NDIlib_find_create_v3(&settings);
+		NDIlib_find_instance_t finder = NDIlib_find_create_v2(&settings);
 		if (!finder) return;
 		while(!terminate_) {
 			if(!NDIlib_find_wait_for_sources(finder, 5000)) {
 				continue;
 			}
 			unsigned int num_sources=0;
-			const NDIlib_source_v2_t* sources = NDIlib_find_get_current_sources_v2(finder, &num_sources);
+			const NDIlib_source_t* sources = NDIlib_find_get_current_sources(finder, &num_sources);
 			std::vector<Source> ret;
 			ret.insert(std::end(ret), sources, sources+num_sources);
 			for(auto &r : ret) {

@@ -6,6 +6,7 @@
 #include <vector>
 #include <mutex>
 #include <thread>
+#include <functional>
 
 namespace ofxNDI {
 

@@ -2,7 +2,7 @@
 
 //-----------------------------------------------------------------------------------------------------------
 //
-// Copyright (C)2014-2022, NewTek, inc.
+// Copyright (C) 2023 Vizrt NDI AB. All rights reserved.
 //
 // This file is part of the NDI Advanced SDK and may not be distributed.
 //

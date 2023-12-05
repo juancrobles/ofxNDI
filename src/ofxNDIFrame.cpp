@@ -115,6 +115,13 @@ template<>
 bool Frame::decode(const VideoFrame &src, ofPixels &dst)
 {
 	dst.setFromPixels(src.p_data, src.xres, src.yres, getOfPixelFormatFromFourCCType(src.FourCC));
+
+#ifdef TARGET_WIN32
+	if (getOfPixelFormatFromFourCCType(src.FourCC) == OF_PIXELS_BGRA) {
+		dst.swapRgb();
+	}
+#endif // TARGET_WIN32
+
 	return true;
 }
 
